@@ -537,9 +537,37 @@ def getNextIdx(currIdx,array):
     nextIdx=(currIdx+jump)%len(array)    
     return nextIdx if nextIdx>=0 else nextIdx+len(array)
 #Q19: --------------------------------------------------------------------------------------------
+def getYoungestCommonAncestor(root,descendantOne,descendantTwo): #O(d) time  | O(1) space
+    depthOne=getDescendantDepth(descendantOne,root)
+    depthTwo=getDescendantDepth(descendantTwo,root)
+    if depthOne>depthTwo:
+        return backtrackAncestralTree(descendantOne,descendantTwo,depthOne-depthTwo)
+    else:
+        return backtrackAncestralTree(descendantTwo,descendantOne,depthTwo-depthOne)
+def getDescendantDepth(descendant,root):
+    depth=0
+    while descendant!=root:
+        depth+=1
+        descendant=descendant.ancestor
+    return depth
+def backtrackAncestralTree(lowerDescendant,higherDescendant,diff):
+    while diff>0:
+        lowerDescendant=lowerDescendant.ancestor
+        diff-=1
+    while lowerDescendant!=higherDescendant:
+        lowerDescendant=lowerDescendant.ancestor
+        higherDescendant=higherDescendant.ancestor
+    return lowerDescendant    
 
-     
-
+#Q20: --------------------------------------------------------------------------------------------
+def minNumberOfCoinsForChange(n,denoms): #O(nd) time | O(n) space
+    numOfCoins=[float("inf") for  amount in range(n+1)]
+    numOfCoins[0]=0
+    for denom in denoms:
+        for amount  in range(len(numOfCoins)):
+            if denom<=amount:
+                numOfCoins[amount]=min(numOfCoins[amount],1+numOfCoins[amount-denom])
+    return numOfCoins[n] if numOfCoins[n]!=float("inf") else -1
 
 #Interviews Questions--------------------------------------------------------------------
 
@@ -718,9 +746,7 @@ def getneighbors(i,j,matrix,visited):
 #   ]
 # }))
 
-print()
-
-
+# print(minNumberOfCoinsForChange(7,[1, 5, 10]))
 
 
 
