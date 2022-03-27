@@ -23,8 +23,10 @@
 
 #solution:3  using l pointer and R pointer
 
+from array import ArrayType
 from operator import contains
 from platform import node
+from sre_constants import JUMP
 import turtle
 
 
@@ -505,10 +507,38 @@ def findLoop(head:LinkedList): # Find loop and return loop head of the linkedLis
         second=second.next
     return first
 
+#Q.17 Depth first Search questions--------------------------------------------------------------------------------------------
+class Node:       #O(v+e) Time | O(v) space
+    def __init__(self, name):
+        self.children = []
+        self.name = name
 
+    def addChild(self, name):
+        self.children.append(Node(name))
+        return self
 
+    def depthFirstSearch(self, array):
+        array.append(self.name)
+        for child in self.children:
+            child.depthFirstSearch(array)
+        return array
+#Q18: single cycle check --------------------------------------------------------------------------------------------
+def hasSingleCycle(array): #O(N) Time | O(1) space
+    numOfElementvisited=0
+    currIdx=0
+    while numOfElementvisited<len(array):
+        if numOfElementvisited>0 and currIdx==0:
+            return False
+        numOfElementvisited+=1
+        currIdx=getNextIdx(currIdx,array)
+    return currIdx==0
+def getNextIdx(currIdx,array):
+    jump=array[currIdx]
+    nextIdx=(currIdx+jump)%len(array)    
+    return nextIdx if nextIdx>=0 else nextIdx+len(array)
+#Q19: --------------------------------------------------------------------------------------------
 
-
+     
 
 
 #Interviews Questions--------------------------------------------------------------------
@@ -688,8 +718,7 @@ def getneighbors(i,j,matrix,visited):
 #   ]
 # }))
 
-
-
+print()
 
 
 
@@ -698,4 +727,3 @@ def getneighbors(i,j,matrix,visited):
 
 # Interview Question Calls
 # print(AssasinVsGuards(['X.....>', '..v..X.', '....X..', 'A......']))               
-
