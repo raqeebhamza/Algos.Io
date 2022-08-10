@@ -65,7 +65,7 @@ def twoArrays(k, A, B):
         if A[i]+B[i]<k:
             return "No"
     return "Yes"
-print(twoArrays(10,[2, 1, 3],[7, 8, 9]))
+# print(twoArrays(10,[2, 1, 3],[7, 8, 9]))
 #--------------------------------------------------SubArray Division-----------------------------------------------------------
 def birthday(s, d, m):
     numWays=0
@@ -74,6 +74,48 @@ def birthday(s, d, m):
         if currSum==d:
             numWays+=1
     return numWays
-print(birthday([2,2,1,3,2],4,2))
+# print(birthday([2,2,1,3,2],4,2))
+#--------------------------------------------------Sale By Match-----------------------------------------------------------
+def sockMerchant(n, ar):
+    hm={}
+    for e in ar:
+        if e not in hm:
+            hm[e]=1
+        else:
+            hm[e]+=1
+    numPair=0
+    for key,val in hm.items():
+        numPair+=val//2
+    return numPair
+# print(sockMerchant(6,[10, 20, 20, 10, 10, 30, 50, 10, 20]))
 
-            
+#--------------------------------------------------Counter Game-----------------------------------------------------------
+
+
+
+def getPowerOfTwo(v):
+    v-=1
+    v |= v >> 1
+    v |= v >> 2
+    v |= v >> 4
+    v |= v >> 8
+    v |= v >> 16
+    v+=1
+    return v
+def isPowerOfTwo(x):
+    return (x != 0) and ((x & (x - 1)) == 0)
+
+def counterGame(n):
+    turns=0
+    while n>1:
+        if isPowerOfTwo(n):
+            n//=2
+        else:
+            p2=getPowerOfTwo(n)//2
+            n-=p2
+        turns+=1
+    if turns%2==0:
+        print("Louise")
+    else:
+        print("Richard")
+print(counterGame(6))

@@ -23,11 +23,6 @@
 
 #solution:3  using l pointer and R pointer
 
-from array import ArrayType
-from operator import contains
-from platform import node
-from sre_constants import JUMP
-import turtle
 
 
 def twoNumberSum(arr,targetSum): # O(nlogn) time | O(1) space
@@ -569,6 +564,24 @@ def minNumberOfCoinsForChange(n,denoms): #O(nd) time | O(n) space
                 numOfCoins[amount]=min(numOfCoins[amount],1+numOfCoins[amount-denom])
     return numOfCoins[n] if numOfCoins[n]!=float("inf") else -1
 
+#Q21: --------------------------------------------------------------------------------------------
+def threeNumberSum(nums,target): #O(n^2) time | O(n) space
+    nums.sort()
+    res=[]
+    for i in range(len(nums)):
+        l=i+1
+        r=len(nums)-1
+        target2=target-nums[i]
+        while l<r:
+            if nums[l]+nums[r]<target2:
+                l+=1
+            elif nums[l]+nums[r]>target2:
+                r-=1
+            else:
+                res.append([nums[i],nums[l],nums[r]])
+                r-=1
+                l+=1
+    return res      
 #Interviews Questions--------------------------------------------------------------------
 
 # Zalando Questions---------------------------------------------------------------------
@@ -639,8 +652,36 @@ def getneighbors(i,j,matrix,visited):
         if  matrix[i][j+1]=='.' and visited[i][j+1]:        
             neigbors.append([i,j+1])
     return neigbors
+import operator
+def tournamentWinner(competitions, results): # O(competitions) time | O(teams) space
+    # Write your code here.
+    teams={}
+    for i in range(len(competitions)):
+        for j in range(len(competitions[i])):
+            if competitions[i][j] in teams:  
+                if results[i] and j==0:   #[1,0]
+                    teams[competitions[i][j]]+=3
+                if not results[i] and j==1:
+                    teams[competitions[i][j]]+=3
+            else:
+                teams[competitions[i][j]]=0
+                if results[i] and j==0:   #[1,0]
+                    teams[competitions[i][j]]+=3
+                if not results[i] and j==1:
+                    teams[competitions[i][j]]+=3
+    return max(teams.items(),key=operator.itemgetter(1))[0]
 
+def nonConstructibleChange(coins): #O(nlogn) time | O(1) space
+    coins.sort()
+    currChangeCreated=0
+    for coin in coins:
+        if coin>currChangeCreated+1:
+            return currChangeCreated+1
+        currChangeCreated+=coin
+    return currChangeCreated+1
 
+  
+        
 
 #---------------------------------------------function calling--------------------------------------------------------
 
@@ -742,12 +783,30 @@ def getneighbors(i,j,matrix,visited):
 #     {"id": "5", "next": "6", "value": 5},
 #     {"id": "6", "next": "7", "value": 6},
 #     {"id": "7", "next": "8", "value": 7},
-#     {"id": "8", "next": "9", "value": 8},
+#     {"id": "8", "next": "9", "value": 8}, 
 #     {"id": "9", "next": "4", "value": 9}
 #   ]
 # }))
 
 # print(minNumberOfCoinsForChange(7,[1, 5, 10]))
+
+# print(tournamentWinner([
+#   ["HTML", "C#"],
+#   ["C#", "Python"],
+#   ["Python", "HTML"]
+# ], [0, 0, 1]))
+
+# print(nonConstructibleChange([5, 7, 1, 1, 2, 3, 22]))
+
+print(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6],0))
+
+
+
+
+
+
+
+
 
 
 
