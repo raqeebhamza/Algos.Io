@@ -1,30 +1,27 @@
 #``````````````````````````````````````````----------------Algo Expert-------------------``````````````````````````````````````````
 
-#Q.1: Two Number SUM -----------------------------------------------------------------------------------------------
+#Q.1:----------------------------------------------------------------Two Number SUM-----------------------------------------------------------
 #solution:1
-# def twoNumberSum(arr,targetSum): #O(n^2) time | O(1) space
-#     for i in range(len(arr)-1):
-#         firstNum=arr[i]
-#         for j in range(i+1,len(arr)):
-#             secondNum=arr[j]
-#             if firstNum+secondNum==targetSum:
-#                 return [firstNum,secondNum]
-#     return []
+def twoNumberSum(arr,targetSum): #O(n^2) time | O(1) space
+    for i in range(len(arr)-1):
+        firstNum=arr[i]
+        for j in range(i+1,len(arr)):
+            secondNum=arr[j]
+            if firstNum+secondNum==targetSum:
+                return [firstNum,secondNum]
+    return []
 
 #solution:2 (fastest solution) by using hashmaps
-# def twoNumberSum(arr,targetSum): # O(n) time | O(n) space   
-#     hashMapOfNum={}
-#     for num in arr:
-#         if targetSum-num in hashMapOfNum:
-#             return [num,targetSum-num]
-#         else:
-#             hashMapOfNum[num]=True
-#     return []
+def twoNumberSum(arr,targetSum): # O(n) time | O(n) space   
+    hashMapOfNum={}
+    for num in arr:
+        if targetSum-num in hashMapOfNum:
+            return [num,targetSum-num]
+        else:
+            hashMapOfNum[num]=True
+    return []
 
 #solution:3  using l pointer and R pointer
-
-
-
 def twoNumberSum(arr,targetSum): # O(nlogn) time | O(1) space
     arr.sort()
     left=0
@@ -39,16 +36,17 @@ def twoNumberSum(arr,targetSum): # O(nlogn) time | O(1) space
             right-=1
     return []                
 
-#Q.2: Validate SubSequence -----------------------------------------------------------------------------------------------
+# print(twoNumberSum([3,5,-4,8,11,1,-1,6],10))
+#Q.2:-------------------------------------------------Validate SubSequence ------------------------------------------------------------------
 #solution:1 using while loop
-# def validateSubSequence(array,sequence): # O(nlogn) time | O(1) space
-#     arrIdx=0
-#     seqIdx=0
-#     while arrIdx <len(array) and seqIdx<len(sequence):
-#         if array[arrIdx]==sequence[seqIdx]:
-#             seqIdx+=1
-#         arrIdx+=1
-#     return seqIdx==len(sequence) 
+def validateSubSequence(array,sequence): # O(nlogn) time | O(1) space
+    arrIdx=0
+    seqIdx=0
+    while arrIdx <len(array) and seqIdx<len(sequence):
+        if array[arrIdx]==sequence[seqIdx]:
+            seqIdx+=1
+        arrIdx+=1
+    return seqIdx==len(sequence) 
        
 #solution:2 using for loop
 def validateSubSequence(array,sequence): # O(nlogn) time | O(1) space
@@ -60,7 +58,8 @@ def validateSubSequence(array,sequence): # O(nlogn) time | O(1) space
             seqIdx+=1
     return seqIdx==len(sequence)
 
-#Q.3: SortedSquareArray -----------------------------------------------------------------------------------------------
+# print(validateSubSequence([5, 1, 22, 25, 6, -1, 8,10],[1, 6, -1, 10]))
+#Q.3:----------------------------------------SortedSquareArray-----------------------------------------------------------------------------------------
 
 #solution:1 using broot force
 def sortedSquaredArray(array): # O(nlogn) time | O(n) space
@@ -71,7 +70,8 @@ def sortedSquaredArray(array): # O(nlogn) time | O(n) space
     sortedSquares.sort()
     return sortedSquares    
 
-#Q.4: fourNumbersum--------------------------------------------------------------------------------------
+# print(sortedSquaredArray([1, 2, -7, 5, 6, 8, 9]))
+#Q.4: fourNumbersum-------------------------------------------------------------------------------------------------------------------------
 def fourNumberSum(array,targetSum): # O(n^2) time | O(n^2) space
     allPairs={}
     ansPairs=[]
@@ -92,7 +92,9 @@ def fourNumberSum(array,targetSum): # O(n^2) time | O(n^2) space
     return ansPairs
 
 
-#Q.5: SubArraySort find the unsort subarray indecies -----------------------------------------------------
+# print(fourNumberSum([7, 6, 4, -1, 1, 2],16))
+
+#Q.5: ---------------------------------------------------SubArraySort find the unsort subarray indecies-------------------------------------
 def subArraySort(array): # O(n) time | O(1) space 
     minOutOfOrder=float("inf")
     maxOutOfOrder=float("-inf")
@@ -118,7 +120,9 @@ def isOutOfOrder(i,num,array):
         return num < array[i-1]     
     return num<array[i-1] or num> array[i+1]
 
-#Q.6: Largest Range present in the array -------------------------------------------------------------------
+# print(subArraySort([1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]))
+
+#Q.6: ----------------------------------------Largest Range present in the array -----------------------------------------------------------
 def largestRange(array): #O(N) time | O(N) space
     notVisited={}
     bestRange=[]
@@ -144,8 +148,10 @@ def largestRange(array): #O(N) time | O(N) space
             maxLength=currLength
             bestRange=[left+1,right-1] 
     return bestRange           
-                
-# Q.7: Min Rewards -----------------------------------------------------------------------------------------
+
+# print(largestRange([1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]))
+
+# Q.7:---------------------------------------------------------Min Rewards------------------------------------------------------------------
 def minRewards(scores):  # O(N) time | O(N) Space.....
     rewards=[1 for _ in scores]
     localMinIdxs=getlocalMinIdx(scores)
@@ -178,7 +184,9 @@ def expandFromLocalMin(localMinIdx,scores,rewards):
         rewards[rightIdx]=rewards[rightIdx-1]+1
         rightIdx+=1
 
-# Q.8: ZigZagTravers----------------------------------------------------------------------------------------
+# print(minRewards([8, 4, 2, 1, 3, 6, 7, 9, 5]))
+
+# Q.8: -------------------------------------------------------ZigZagTravers-------------------------------------------------------------------
 def zigZagTraverse(array): #O(N) time | O(N) space
     height=len(array)-1
     width=len(array[0])-1
@@ -213,7 +221,14 @@ def zigZagTraverse(array): #O(N) time | O(N) space
 def isOutOfBound(row,col,height,width):
     return row<0 or col<0 or col>width or row>height
 
-#Q.9: SpiralTraverse---------------------------------------------------------------------------------------- 
+
+# print(zigZagTraverse([
+#   [1, 3, 4, 10],
+#   [2, 5, 9, 11],
+#   [6, 8, 12, 15],
+#   [7, 13, 14, 16]
+# ]))
+#Q.9:--------------------------------------------------------SpiralTraverse--------------------------------------------------------------------- 
 def spiralTraverse(array): #O(n) time | O(n) space 
     result=[]
     startRow,endRow=0,len(array)-1
@@ -241,36 +256,16 @@ def spiralTraverse(array): #O(n) time | O(n) space
         endCol-=1         
     return result        
 
-#Q.10 sameBsts--------------------------------------------------------------------------------------------
-def sameBsts(arrayOne,arrayTwo): # O(n^2) time | O(n^2) space
-    if len(arrayOne)!=len(arrayTwo):
-        return False
-    if len(arrayOne)==0 and len(arrayTwo)==0:
-        return True
-    if arrayOne[0]!=arrayTwo[0]:
-        return False 
+# print(spiralTraverse([
+#   [1,  2,  3],
+#   [12, 13, 4],
+#   [11, 14, 5],
+#   [10, 15, 6],
+#   [9,  8,  7],
+# ]))
 
-    leftOne=getSmaller(arrayOne)
-    leftTwo=getSmaller(arrayTwo)
-    rightOne=getBiggerOrEqual(arrayOne)
-    rightTwo=getBiggerOrEqual(arrayTwo)
 
-    return sameBsts(leftOne,leftTwo) and sameBsts(rightOne,rightTwo)
-
-def getSmaller(array):
-    smaller=[]
-    for i in range(1,len(array)):
-        if array[i]< array[0]:
-            smaller.append(array[i])
-    return smaller        
-def getBiggerOrEqual(array):
-    biggerOrEqual=[]
-    for i in range(1,len(array)):
-        if array[i]>= array[0]:
-            biggerOrEqual.append(array[i])
-    return biggerOrEqual  
-
-#Q.11 KnapSackProblem........................................................................
+#Q.11------------------------------------------------------------KnapSackProblem--------------------------------------------------------------
 def knapsackProblem(items,capacity): # O(NC) time | O(NC) space  => N=number of items, C= total Capacity
     knapsackValues=[[0 for x in range(0,capacity+1)] for y in range(0,len(items)+1)]
     for i in range(1,len(items)+1):
@@ -298,7 +293,15 @@ def getKnapSackItems(knapsackValues,items):
             break
     return list(reversed(sequence))    
 
-#Q.11 trapwater rain...........................................................................
+
+# print(knapsackProblem([
+#   [1, 2],
+#   [4, 3],
+#   [5, 6],
+#   [6, 7]
+# ],10))
+
+#Q.11 -----------------------------------------------------------trapwater rain---------------------------------------------------------------------------
 def trap(height): # O(N) time | O(1) space
     leftMax,rightMax=0,0
     left,right=0,len(height)-1
@@ -316,19 +319,21 @@ def trap(height): # O(N) time | O(1) space
             right-=1
     return trappedWater  
 
-#Q.12 levenshteinDistance........................................................................
-# def levenshteinDistance(str1,str2): # O(nm) Time | O(nm) space
-#     edits=[[ x for x in range(len(str1)+1)] for y in range(len(str2)+1)] 
-#     for i in range(1,len(str2)+1):
-#         edits[i][0]=edits[i-1][0]+1
-#     for i in range(1,len(str2)+1):
-#         for j in range(1,len(str1)+1):
-#             if str1[j-1] == str2[i-1]:
-#                 edits[i][j]=edits[i-1][j-1]
-#             else:
-#                 edits[i][j]=1+min(edits[i][j-1],edits[i-1][j],edits[i-1][j-1]) 
-#     return edits[-1][-1]
-# 2nd solution with better space complexity------------------------------------------------------------
+# print(trap([4,2,0,3,2,5]))
+#Q.12 ----------------------------------------------------------levenshteinDistance----------------------------------------------------------
+#1st Solution
+def levenshteinDistance(str1,str2): # O(nm) Time | O(nm) space
+    edits=[[ x for x in range(len(str1)+1)] for y in range(len(str2)+1)] 
+    for i in range(1,len(str2)+1):
+        edits[i][0]=edits[i-1][0]+1
+    for i in range(1,len(str2)+1):
+        for j in range(1,len(str1)+1):
+            if str1[j-1] == str2[i-1]:
+                edits[i][j]=edits[i-1][j-1]
+            else:
+                edits[i][j]=1+min(edits[i][j-1],edits[i-1][j],edits[i-1][j-1]) 
+    return edits[-1][-1]
+# 2nd solution 
 def levenshteinDistance(str1,str2): # O(nm) time | O(min(n,m)) Space
     small=str1 if len(str1)<len(str2) else str2
     big=str1 if len(str1)>=len(str2) else str2
@@ -349,7 +354,8 @@ def levenshteinDistance(str1,str2): # O(nm) time | O(min(n,m)) Space
                 currentEdits[j]=1+min(currentEdits[j-1],previousEdits[j],previousEdits[j-1])
     return evenEdits[-1] if len(big)%2==0 else oddEdits[-1]
 
-#Q.14 RiverSizes ---------------------------------------------------------------------
+# print(levenshteinDistance("abc","yabd"))
+#Q.14------------------------------------------------------------RiverSizes------------------------------------------------------------------
 def riverSizes(matrix):  # O(wh) time | O(wh) space
     sizes=[]
     visited=[[False for value in row] for row in matrix]
@@ -395,7 +401,14 @@ def getUnVisitedNeighbors(i,j,matrix,visited):
             neighbors.append([i,j+1])
     return neighbors
 
-#Q.15 Apartment Hunting ----------------------------------------------------------------
+# print(riverSizes([
+#   [1, 0, 0, 1, 0],
+#   [1, 0, 1, 0, 0],
+#   [0, 0, 1, 0, 1],
+#   [1, 0, 1, 0, 1],
+#   [1, 0, 1, 1, 0]
+# ]))
+#Q.15--------------------------------------------------------------Apartment Hunting----------------------------------------------------------
 def apartmentHunting(blocks,req):
     minDistancesFromBlocks=list(map(lambda req:getMinDistances(blocks,req),req))
     print(minDistancesFromBlocks)
@@ -431,310 +444,6 @@ def getIdxOfMinValue(array):
             idxAtMinValue=i
     return idxAtMinValue    
 
-
-#Q.16 Cycle in Graph -------------------------------------------------------------------
-# def cycleInGraph(edges): # O(v+e) Time | O(v) space
-#     numberOfNodes=len(edges)
-#     nodesInStack=[False for _ in range(numberOfNodes)]
-#     isVisited=[False for _ in range(numberOfNodes)]
-#     for node in range(numberOfNodes):
-#         if isVisited[node]:
-#             continue
-#         containsCycle=isNodeContainsCycle(edges,node,isVisited,nodesInStack)
-#         if containsCycle:
-#             return True
-#     return False
-# def isNodeContainsCycle(edges,node,isVisited,nodesInStack):
-#     nodesInStack[node]=True
-#     isVisited[node]=True
-#     neigbours=edges[node]
-#     for neighbor in neigbours:
-#         if not isVisited[neighbor]:
-#             containsCycle=isNodeContainsCycle(edges,neighbor,isVisited,nodesInStack)
-#             if containsCycle:
-#                 return True
-#         elif nodesInStack[neighbor]:
-#             return True   
-#     nodesInStack[node]=False         
-#     return False
-#Solution:2.....................................................................
-WHITE, GREY,BLACK=0,1,2
-def cycleInGraph(edges): # O(v+e) Time | O(v) space 
-    numberOfNodes=len(edges)
-    colors=[WHITE for _ in range(numberOfNodes)]
-    for node in range(numberOfNodes):
-        if colors[node]!=WHITE:
-            continue
-        containsCycle=traverseAndColorNode(edges,node,colors)
-        if containsCycle:
-            return True
-    return False
-def traverseAndColorNode(edges,node,colors):
-    colors[node]=GREY
-    neighbors=edges[node]
-    for neighbor in neighbors:
-        if colors[neighbor]==GREY:
-            return True
-        if colors[neighbor]!=WHITE:
-            continue
-        containsCycle=traverseAndColorNode(edges,neighbor,colors)
-        if containsCycle:
-            return True
-    colors[node]=BLACK
-    return False        
-
-#Q.16 Loop in the linkedList -----------------------------------------------------------
-class LinkedList:
-    def __init__(self,value) -> None:
-        self.value=value
-        self.next=None
-def findLoop(head:LinkedList): # Find loop and return loop head of the linkedList
-    if not head:
-        return head
-    first=head.next
-    second=head.next.next
-    while first!=second:
-        first=first.next
-        second=second.next.next
-    first=head
-    while first!=second:
-        first=first.next
-        second=second.next
-    return first
-
-#Q.17 Depth first Search questions--------------------------------------------------------------------------------------------
-class Node:       #O(v+e) Time | O(v) space
-    def __init__(self, name):
-        self.children = []
-        self.name = name
-
-    def addChild(self, name):
-        self.children.append(Node(name))
-        return self
-
-    def depthFirstSearch(self, array):
-        array.append(self.name)
-        for child in self.children:
-            child.depthFirstSearch(array)
-        return array
-#Q18: single cycle check --------------------------------------------------------------------------------------------
-def hasSingleCycle(array): #O(N) Time | O(1) space
-    numOfElementvisited=0
-    currIdx=0
-    while numOfElementvisited<len(array):
-        if numOfElementvisited>0 and currIdx==0:
-            return False
-        numOfElementvisited+=1
-        currIdx=getNextIdx(currIdx,array)
-    return currIdx==0
-def getNextIdx(currIdx,array):
-    jump=array[currIdx]
-    nextIdx=(currIdx+jump)%len(array)    
-    return nextIdx if nextIdx>=0 else nextIdx+len(array)
-#Q19: --------------------------------------------------------------------------------------------
-def getYoungestCommonAncestor(root,descendantOne,descendantTwo): #O(d) time  | O(1) space
-    depthOne=getDescendantDepth(descendantOne,root)
-    depthTwo=getDescendantDepth(descendantTwo,root)
-    if depthOne>depthTwo:
-        return backtrackAncestralTree(descendantOne,descendantTwo,depthOne-depthTwo)
-    else:
-        return backtrackAncestralTree(descendantTwo,descendantOne,depthTwo-depthOne)
-def getDescendantDepth(descendant,root):
-    depth=0
-    while descendant!=root:
-        depth+=1
-        descendant=descendant.ancestor
-    return depth
-def backtrackAncestralTree(lowerDescendant,higherDescendant,diff):
-    while diff>0:
-        lowerDescendant=lowerDescendant.ancestor
-        diff-=1
-    while lowerDescendant!=higherDescendant:
-        lowerDescendant=lowerDescendant.ancestor
-        higherDescendant=higherDescendant.ancestor
-    return lowerDescendant    
-
-#Q20: --------------------------------------------------------------------------------------------
-def minNumberOfCoinsForChange(n,denoms): #O(nd) time | O(n) space
-    numOfCoins=[float("inf") for  amount in range(n+1)]
-    numOfCoins[0]=0
-    for denom in denoms:
-        for amount  in range(len(numOfCoins)):
-            if denom<=amount:
-                numOfCoins[amount]=min(numOfCoins[amount],1+numOfCoins[amount-denom])
-    return numOfCoins[n] if numOfCoins[n]!=float("inf") else -1
-
-#Q21: --------------------------------------------------------------------------------------------
-def threeNumberSum(nums,target): #O(n^2) time | O(n) space
-    nums.sort()
-    res=[]
-    for i in range(len(nums)):
-        l=i+1
-        r=len(nums)-1
-        target2=target-nums[i]
-        while l<r:
-            if nums[l]+nums[r]<target2:
-                l+=1
-            elif nums[l]+nums[r]>target2:
-                r-=1
-            else:
-                res.append([nums[i],nums[l],nums[r]])
-                r-=1
-                l+=1
-    return res      
-#Interviews Questions--------------------------------------------------------------------
-
-# Zalando Questions---------------------------------------------------------------------
-# B=['X.....>', '..v..X.', '.>..X..', 'A......']
-# B=['...', '>.A']
-# B=['A.v', '...']
-def AssasinVsGuards(B):
-    matrix=[]
-    for i in range(0,len(B)):
-        matrix.append(list(B[i]))   
-    up='^'
-    down='v'
-    right='>'
-    left='<'
-    ai,aj=0,0
-    visited=[[False for value in row] for row in matrix]
-    for i in range(0,len(matrix)):
-        for j in range(0,len(matrix[i])):
-            if matrix[i][j]=='A':
-                ai=i
-                aj=j
-            if matrix[i][j]==up:
-                for k in reversed(range(0,i-1)):
-                    if matrix[k][j]=='.':
-                        matrix[k][j]=up
-                    else:
-                        break
-            if matrix[i][j]==down:
-                for k in range(i+1,len(matrix)):
-                    if matrix[k][j]=='.':
-                        matrix[k][j]=down
-                    else:
-                        break
-            if matrix[i][j]==right:
-                for k in range(j+1,len(matrix[i])):
-                    if matrix[i][k]=='.':
-                        matrix[i][k]=right
-                    else:
-                        break
-    q=[[ai,aj]]
-    if matrix[len(matrix)-1][len(matrix[0])-2]==right:
-        return False
-    if matrix[len(matrix)-2][len(matrix[0])-1]==down:
-        return False    
-    count=1
-    while len(q):
-        curr=q.pop(0)
-        visited[curr[0]][curr[1]]=True
-        if curr[0]==len(matrix)-1 and curr[1]==len(matrix[0])-1:
-            return True
-        neigbors=getneighbors(curr[0],curr[1],matrix,visited)
-        for n in neigbors:    
-            q.append(n)  
-    return False    
-
-def getneighbors(i,j,matrix,visited):
-    neigbors=[]
-    if i!=0:  # up neighbor
-        if matrix[i-1][j]=='.' and visited[i-1][j]:
-            neigbors.append([i-1,j])
-    if j!=0: # left neighbor
-        if  matrix[i][j-1]=='.' and  visited[i][j-1]: 
-            neigbors.append([i,j-1])
-    if i!=len(matrix)-1: # down neighbor
-        if  matrix[i+1][j]=='.' and visited[i+1][j]:
-            neigbors.append([i+1,j])
-    if j!= len(matrix[i])-1: # right neighbor
-        if  matrix[i][j+1]=='.' and visited[i][j+1]:        
-            neigbors.append([i,j+1])
-    return neigbors
-import operator
-def tournamentWinner(competitions, results): # O(competitions) time | O(teams) space
-    # Write your code here.
-    teams={}
-    for i in range(len(competitions)):
-        for j in range(len(competitions[i])):
-            if competitions[i][j] in teams:  
-                if results[i] and j==0:   #[1,0]
-                    teams[competitions[i][j]]+=3
-                if not results[i] and j==1:
-                    teams[competitions[i][j]]+=3
-            else:
-                teams[competitions[i][j]]=0
-                if results[i] and j==0:   #[1,0]
-                    teams[competitions[i][j]]+=3
-                if not results[i] and j==1:
-                    teams[competitions[i][j]]+=3
-    return max(teams.items(),key=operator.itemgetter(1))[0]
-
-def nonConstructibleChange(coins): #O(nlogn) time | O(1) space
-    coins.sort()
-    currChangeCreated=0
-    for coin in coins:
-        if coin>currChangeCreated+1:
-            return currChangeCreated+1
-        currChangeCreated+=coin
-    return currChangeCreated+1
-
-  
-        
-
-#---------------------------------------------function calling--------------------------------------------------------
-
-# print(twoNumberSum([3,5,-4,8,11,1,-1,6],10))
-
-# print(validateSubSequence([5, 1, 22, 25, 6, -1, 8,10],[1, 6, -1, 10]))
-
-# print(sortedSquaredArray([1, 2, -7, 5, 6, 8, 9]))
-
-# print(fourNumberSum([7, 6, 4, -1, 1, 2],16))
-
-# print(subArraySort([1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]))
-
-# print(largestRange([1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]))
-
-# print(minRewards([8, 4, 2, 1, 3, 6, 7, 9, 5]))
-
-# print(zigZagTraverse([
-#   [1, 3, 4, 10],
-#   [2, 5, 9, 11],
-#   [6, 8, 12, 15],
-#   [7, 13, 14, 16]
-# ]))
-
-# print(spiralTraverse([
-#   [1,  2,  3],
-#   [12, 13, 4],
-#   [11, 14, 5],
-#   [10, 15, 6],
-#   [9,  8,  7],
-# ]))
-
-# print(sameBsts([10, 8, 5, 15, 2, 12, 11, 94, 81],[10, 15, 8, 12, 94, 81, 5, 2, 11]))
-
-# print(knapsackProblem([
-#   [1, 2],
-#   [4, 3],
-#   [5, 6],
-#   [6, 7]
-# ],10))
-
-# print(trap([4,2,0,3,2,5]))
-
-# print(levenshteinDistance("abc","yabd"))
-
-# print(riverSizes([
-#   [1, 0, 0, 1, 0],
-#   [1, 0, 1, 0, 0],
-#   [0, 0, 1, 0, 1],
-#   [1, 0, 1, 0, 1],
-#   [1, 0, 1, 1, 0]
-# ]))
- 
 # print(apartmentHunting([
 #   {
 #     "gym":False ,
@@ -761,6 +470,57 @@ def nonConstructibleChange(coins): #O(nlogn) time | O(1) space
 #     "school": True,
 #     "store": True
 #   }],["gym", "school", "store"]))
+#Q.16 ------------------------------------------------------------Cycle in Graph -------------------------------------------------------------------
+# Solution:1
+def cycleInGraph(edges): # O(v+e) Time | O(v) space
+    numberOfNodes=len(edges)
+    nodesInStack=[False for _ in range(numberOfNodes)]
+    isVisited=[False for _ in range(numberOfNodes)]
+    for node in range(numberOfNodes):
+        if isVisited[node]:
+            continue
+        containsCycle=isNodeContainsCycle(edges,node,isVisited,nodesInStack)
+        if containsCycle:
+            return True
+    return False
+def isNodeContainsCycle(edges,node,isVisited,nodesInStack):
+    nodesInStack[node]=True
+    isVisited[node]=True
+    neigbours=edges[node]
+    for neighbor in neigbours:
+        if not isVisited[neighbor]:
+            containsCycle=isNodeContainsCycle(edges,neighbor,isVisited,nodesInStack)
+            if containsCycle:
+                return True
+        elif nodesInStack[neighbor]:
+            return True   
+    nodesInStack[node]=False         
+    return False
+# Solution:2
+WHITE, GREY,BLACK=0,1,2
+def cycleInGraph(edges): # O(v+e) Time | O(v) space 
+    numberOfNodes=len(edges)
+    colors=[WHITE for _ in range(numberOfNodes)]
+    for node in range(numberOfNodes):
+        if colors[node]!=WHITE:
+            continue
+        containsCycle=traverseAndColorNode(edges,node,colors)
+        if containsCycle:
+            return True
+    return False
+def traverseAndColorNode(edges,node,colors):
+    colors[node]=GREY
+    neighbors=edges[node]
+    for neighbor in neighbors:
+        if colors[neighbor]==GREY:
+            return True
+        if colors[neighbor]!=WHITE:
+            continue
+        containsCycle=traverseAndColorNode(edges,neighbor,colors)
+        if containsCycle:
+            return True
+    colors[node]=BLACK
+    return False        
 
 
 # print(cycleInGraph([
@@ -772,6 +532,24 @@ def nonConstructibleChange(coins): #O(nlogn) time | O(1) space
 #   []
 # ]))
 
+#Q.16-------------------------------------------------------------Loop in the linkedList------------------------------------------------------
+class LinkedList:
+    def __init__(self,value) -> None:
+        self.value=value
+        self.next=None
+def findLoop(head:LinkedList): # Find loop and return loop head of the linkedList
+    if not head:
+        return head
+    first=head.next
+    second=head.next.next
+    while first!=second:
+        first=first.next
+        second=second.next.next
+    first=head
+    while first!=second:
+        first=first.next
+        second=second.next
+    return first
 # print(findLoop({
 #   "head": "0",
 #   "nodes": [
@@ -787,8 +565,218 @@ def nonConstructibleChange(coins): #O(nlogn) time | O(1) space
 #     {"id": "9", "next": "4", "value": 9}
 #   ]
 # }))
+#Q.17 ----------------------------------------------------------Depth first Search questions--------------------------------------------------------------------------------------------
+class Node:       #O(v+e) Time | O(v) space
+    def __init__(self, name):
+        self.children = []
+        self.name = name
+
+    def addChild(self, name):
+        self.children.append(Node(name))
+        return self
+
+    def depthFirstSearch(self, array):
+        array.append(self.name)
+        for child in self.children:
+            child.depthFirstSearch(array)
+        return array
+
+#Q18:------------------------------------------------------------single cycle check----------------------------------------------------------
+def hasSingleCycle(array): #O(N) Time | O(1) space
+    numOfElementvisited=0
+    currIdx=0
+    while numOfElementvisited<len(array):
+        if numOfElementvisited>0 and currIdx==0:
+            return False
+        numOfElementvisited+=1
+        currIdx=getNextIdx(currIdx,array)
+    return currIdx==0
+def getNextIdx(currIdx,array):
+    jump=array[currIdx]
+    nextIdx=(currIdx+jump)%len(array)    
+    return nextIdx if nextIdx>=0 else nextIdx+len(array)
+
+#Q19: ----------------------------------------------------------YoungestCommonAncestor--------------------------------------------------------------------------------------------
+def getYoungestCommonAncestor(root,descendantOne,descendantTwo): #O(d) time  | O(1) space
+    depthOne=getDescendantDepth(descendantOne,root)
+    depthTwo=getDescendantDepth(descendantTwo,root)
+    if depthOne>depthTwo:
+        return backtrackAncestralTree(descendantOne,descendantTwo,depthOne-depthTwo)
+    else:
+        return backtrackAncestralTree(descendantTwo,descendantOne,depthTwo-depthOne)
+def getDescendantDepth(descendant,root):
+    depth=0
+    while descendant!=root:
+        depth+=1
+        descendant=descendant.ancestor
+    return depth
+def backtrackAncestralTree(lowerDescendant,higherDescendant,diff):
+    while diff>0:
+        lowerDescendant=lowerDescendant.ancestor
+        diff-=1
+    while lowerDescendant!=higherDescendant:
+        lowerDescendant=lowerDescendant.ancestor
+        higherDescendant=higherDescendant.ancestor
+    return lowerDescendant    
+
+#Q20: --------------------------------------------------------minNumberOfCoinsForChange--------------------------------------------------------------------------------------------
+def minNumberOfCoinsForChange(n,denoms): #O(nd) time | O(n) space
+    numOfCoins=[float("inf") for  amount in range(n+1)]
+    numOfCoins[0]=0
+    for denom in denoms:
+        for amount  in range(len(numOfCoins)):
+            if denom<=amount:
+                numOfCoins[amount]=min(numOfCoins[amount],1+numOfCoins[amount-denom])
+    return numOfCoins[n] if numOfCoins[n]!=float("inf") else -1
 
 # print(minNumberOfCoinsForChange(7,[1, 5, 10]))
+
+#Q21: -----------------------------------------------------------threeNumberSum--------------------------------------------------------------------------------------------
+def threeNumberSum(nums,target): #O(n^2) time | O(n) space
+    nums.sort()
+    res=[]
+    for i in range(len(nums)):
+        l=i+1
+        r=len(nums)-1
+        target2=target-nums[i]
+        while l<r:
+            if nums[l]+nums[r]<target2:
+                l+=1
+            elif nums[l]+nums[r]>target2:
+                r-=1
+            else:
+                res.append([nums[i],nums[l],nums[r]])
+                r-=1
+                l+=1
+    return res
+# print(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6],0))
+#Q22: ----------------------------------------------------smallestDifference---------------------------------------------------------
+def smallestDifference(arrayOne, arrayTwo): #O(nlogn)+O(mlogm) time | O(1) space
+    arrayOne.sort()
+    arrayTwo.sort()
+    print(arrayOne)
+    print(arrayTwo)
+    i=j=0
+    ans=[arrayOne[0],arrayTwo[0]]
+    while i<len(arrayOne) and j<len(arrayTwo):
+        if abs(arrayOne[i]-arrayTwo[j])<abs(ans[0]-ans[1]):
+            ans=arrayOne[i],arrayTwo[j]
+        if arrayOne[i]>arrayTwo[j]:
+            j+=1
+        else:
+            i+=1
+    return ans
+# print(smallestDifference([-1, 5, 10, 20, 28, 3],[26, 134, 135, 15, 17]))
+
+#Q23: --------------------------------------------------moveElementToEnd------------------------------------------------------------------
+def moveElementToEnd(array, toMove): #O(N) time | O(1) space
+    i,j=0,len(array)-1
+    while i<j:
+        while i<j and array[j]==toMove:
+            j-=1
+        if array[i]==toMove:
+            array[i],array[j]=array[j],array[i]
+        i+=1
+    return array
+# print(moveElementToEnd([2, 1, 2, 2, 2, 3, 4, 2],2))
+
+#Q24: ----------------------------------------------------isMonotonic-----------------------------------------------------------------------
+def isMonotonic(array): #O(N) time | O(1) space
+    isNonDecreasing=True
+    isNonIncreasing=True
+    for i in range(1,len(array)):
+        if array[i]<array[i-1]:
+            isNonDecreasing=False
+        if array[i]>array[i-1]:
+            isNonIncreasing=False
+    return isNonIncreasing or isNonDecreasing
+# print(isMonotonic([-1, -5, -10, -1100, -1100, -1101, -1102, -9001]))
+
+#Q25: ---------------------------------------------------longestPeak-----------------------------------------------------------------------   
+def longestPeak(array): #O(n) time | O(1) space
+    i=1
+    longestPeakLength=0
+    while i<len(array)-1:
+        isPeak=array[i-1]<array[i] and array[i]>array[i+1]
+        if not isPeak:
+            i+=1
+            continue
+        leftIdx=i-2
+        while leftIdx>=0 and array[leftIdx]<array[leftIdx+1]:
+            leftIdx-=1
+        rightIdx=i+2
+        while rightIdx<len(array) and array[rightIdx]<array[rightIdx-1]:
+            rightIdx+=1
+        currPeakLen=rightIdx-leftIdx-1
+        longestPeakLength=max(currPeakLen,longestPeakLength)
+        i=rightIdx
+    return longestPeakLength
+
+# print(longestPeak([1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]))
+#Q26: --------------------------------------arrayOfProducts without using division----------------------------------------------------------------------   
+def arrayOfProducts(array): #O(N) time | O(N) space
+    right,left=[1]*len(array),[1]*len(array)
+    currProd=1
+    for i in range(len(array)):
+        left[i]=currProd
+        currProd*=array[i]
+    currProd=1
+    print(left)
+    for i in range(len(array)-1,-1,-1):
+        right[i]=currProd
+        currProd*=array[i]
+    
+    print(right)
+    for i in range(len(right)):
+        left[i]*=right[i]
+    return left
+# print(arrayOfProducts([5, 1, 4, 2]))
+#Q28: --------------------------------------------------firstDuplicateValue-------------------------------------------   
+def firstDuplicateValue(array): #O(N) time | O(1) space
+    for value in array:
+        absVal=abs(value)
+        if array[absVal-1]<0:
+            return absVal
+        array[absVal-1]*=-1
+    return -1
+
+#Q28: --------------------------------------------------mergeOverlappingIntervals--------------------------------------------   
+def mergeOverlappingIntervals(intervals): #O(nlogn) time | O(n) space
+    intervals.sort(key= lambda x: x[0])
+    mergedIntevals=[]
+    for interval in intervals:
+        if len(mergedIntevals)==0:
+            mergedIntevals.append(interval)
+        else:
+            if mergedIntevals[-1][1]>=interval[0]:
+                mergedIntevals[-1][1]=max(mergedIntevals[-1][1],interval[1])
+            else:
+                mergedIntevals.append(interval)
+    return mergedIntevals
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#---------------------------------------------function calling-------------------------------------------------------
+
+
+
 
 # print(tournamentWinner([
 #   ["HTML", "C#"],
@@ -798,18 +786,5 @@ def nonConstructibleChange(coins): #O(nlogn) time | O(1) space
 
 # print(nonConstructibleChange([5, 7, 1, 1, 2, 3, 22]))
 
-print(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6],0))
 
 
-
-
-
-
-
-
-
-
-
-
-# Interview Question Calls
-# print(AssasinVsGuards(['X.....>', '..v..X.', '....X..', 'A......']))               
