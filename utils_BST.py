@@ -1,11 +1,4 @@
-from syslog import closelog
 
-
-class BST:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
 #Question---------------------------------------------------------sameBsts----------------------------------------------------------------------
 def sameBsts(arrayOne,arrayTwo): # O(n^2) time | O(n^2) space
     if len(arrayOne)!=len(arrayTwo):
@@ -196,3 +189,71 @@ def reversedInOrderTraversal(node,k,treeInfo):
         treeInfo.numberOfNodeVisited+=1
         treeInfo.latestVisitedNodeValue=node.value
         reversedInOrderTraversal(node.left,k,treeInfo)
+
+#Question-----------------------------------------------------binaryTreeConstruction--------------------------------------------------------------------
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+    def insert(self, value):
+        if value<self.value:
+            if self.left:
+                self.left.insert(value)
+            else:
+                self.left=BST(value)
+        elif value>=self.value:
+            if self.right:
+                self.right.insert(value)
+            else:
+                self.right=BST(value)
+        return self
+    def contains(self,value):
+        if value<self.value:
+            if self.left:
+                return self.left.contains(value)
+            else:
+                return False
+        elif value>self.value:
+            if self.right:
+                return self.right.contains(value)
+            else:
+                return False
+        elif value==self.value:
+            return True
+    
+    def remove(self,value,parent=None):
+        if value<self.value:
+            if self.left is not None:
+                self.left.remove(value,self)
+        elif value>self.value:
+            if self.right is not None:
+                self.right.remove(value,self)
+        else:
+            if self.left is not None and self.right is not None:
+                self.value=self.right.getMinValue()
+                self.right.remove(self.value,self)
+            elif parent is None:
+                if self.left is not None:
+                    self.value=self.left.value
+                    self.right=self.left.right
+                    self.left=self.left.left
+                elif self.right is not None:
+                    self.value=self.right.value
+                    self.right=self.right.right
+                    self.left=self.right.left
+                else:
+                    pass
+            elif parent.left==self:
+                parent.left=self.left if self.left is not None else self.right
+            elif parent.right==self:
+                parent.right=self.right if self.right is not None else self.left
+        return self
+    def getMinValue(self):
+        if self.left:
+            return self.left.getMinValue()
+        else:
+            return self.value
+
+#Question-----------------------------------------------------reconstructBst--------------------------------------------------------------------
